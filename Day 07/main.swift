@@ -9,9 +9,15 @@ import Foundation
 
 let data = Input
 
-struct Rule {
+// MARK: - Data
+
+struct Rule: CustomDebugStringConvertible {
     let color: String
     let amount: Int
+
+    var debugDescription: String {
+        return "\(amount) \(color)"
+    }
 }
 
 struct Bag {
@@ -19,10 +25,12 @@ struct Bag {
     let rules: [Rule]
 }
 
+// MARK: - Parsing
+
 let bagRegex = try! NSRegularExpression(pattern: "(.+) bags contain (.+)", options: [])
 let ruleRegex = try! NSRegularExpression(pattern: "(\\d+) ([^,.]+) bags?[.,]", options: [])
 
-var bags: [Bag] = []
+var bags: [String:Bag] = [:]
 
 for line in data.split(separator: "\n") {
     let bagRange = NSRange(line.startIndex ..< line.endIndex, in: line)
@@ -50,15 +58,16 @@ for line in data.split(separator: "\n") {
         })
 
         let bag = Bag(color: String(color), rules: rules)
-        bags.append(bag)
+        bags[bag.color] = bag
 
         print("Bag: \(bag)")
     }
 }
 
+// MARK: - Part 1
 var containedBy: [String:[String]] = [:]
 
-for bag in bags {
+for bag in bags.values {
     for rule in bag.rules {
         if containedBy[rule.color] == nil {
             containedBy[rule.color] = []
@@ -68,11 +77,10 @@ for bag in bags {
     }
 }
 
-var toVisit: [String] = containedBy["shiny gold"]!
+var toVisit: [String] = containedBy["shiny gold"] ?? []
 var valid: Set<String> = []
 
 while !toVisit.isEmpty {
-
     let current = toVisit.removeFirst()
 
     guard !valid.contains(current) else { continue }
@@ -86,3 +94,27 @@ while !toVisit.isEmpty {
 
 print("Valid: \(valid)")
 print("Count: \(valid.count)")
+
+// MARK: - Part 2
+
+var toVisit2: [Bag] = [bags["shiny gold"]!]
+var sum = 0
+
+while !toVisit2.isEmpty {
+    let current = toVisit2.removeFirst()
+
+    for rule in current.rules {
+        sum += rule.amount
+        let nextBag = bags[rule.color]!
+
+        for _ in 0 ..< rule.amount {
+            toVisit2.append(nextBag)
+        }
+    }
+
+    // print("Current State: \(toVisit2)")
+    // print("Current Amount: \(sum)")
+}
+
+print("Total: \(sum)")
+
