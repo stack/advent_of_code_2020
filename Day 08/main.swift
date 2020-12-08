@@ -12,7 +12,7 @@ let data = Input
 enum Operation {
     case acc(Int)
     case jmp(Int)
-    case nop
+    case nop(Int)
 
     static func parse<T: StringProtocol>(_ line: T) -> Operation {
         let parts = line.split(separator: " ")
@@ -26,7 +26,7 @@ enum Operation {
         case "jmp":
             return .jmp(value)
         case "nop":
-            return .nop
+            return .nop(value)
         default:
             fatalError("Unhandled operation: \(parts[0])")
         }
@@ -42,6 +42,70 @@ class Computer {
     func parse<T: StringProtocol>(_ line: T) {
         let operation = Operation.parse(line)
         operations.append(operation)
+    }
+
+    func analyze() {
+        // Find all indexes that have jmp or nop
+        var possible: [Int] = []
+        for (idx, operation) in operations.enumerated() {
+            switch operation {
+            case .jmp(_), .nop(_):
+                possible.append(idx)
+            default:
+                break
+            }
+        }
+
+        while !possible.isEmpty {
+            let indexToModify = possible.removeFirst()
+
+            print("Swapping at position \(indexToModify)")
+
+            var newOperations = operations
+
+            switch newOperations[indexToModify] {
+            case .jmp(let x):
+                newOperations[indexToModify] = .nop(x)
+            case .nop(let x):
+                newOperations[indexToModify] = .jmp(x)
+            default:
+                break
+            }
+
+            accumulator = 0
+            head = 0
+
+            var previousHeads: Set<Int> = []
+
+            while true {
+                if previousHeads.contains(head) {
+                    print("Loop at \(indexToModify). Start over.")
+                    break
+                }
+
+                if head == newOperations.count {
+                    print("Success at \(indexToModify): \(accumulator)")
+                    return
+                }
+
+                if head > newOperations.count {
+                    print("Too far at \(indexToModify): Start over.")
+                }
+
+                previousHeads.insert(head)
+
+                let operation = newOperations[head]
+                switch operation {
+                case .acc(let x):
+                    accumulator += x
+                    head += 1
+                case .jmp(let x):
+                    head += x
+                case .nop:
+                    head += 1
+                }
+            }
+        }
     }
 
     func run() {
@@ -75,3 +139,5 @@ for line in data.split(separator: "\n") {
 
 computer.run()
 print("Value: \(computer.accumulator)")
+
+computer.analyze()
