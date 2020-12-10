@@ -9,7 +9,9 @@ import Foundation
 
 let data = Input
 
-let joltages = data.split(separator: "\n").map { Int($0)! }.sorted()
+var joltages = data.split(separator: "\n").map { Int($0)! }.sorted()
+joltages.insert(0, at: 0)
+joltages.append(joltages.max()! + 3)
 
 // MARK: - Part 1
 
@@ -28,54 +30,38 @@ for (idx, value) in joltages.enumerated() {
     sums[diff] += 1
 }
 
-diffs.append(3)
-sums[3] += 1
-
 print("Diffs: \(diffs)")
 print("Sums: \(sums)")
 print("Answer: \(sums[1] * sums[3])")
 
 // MARK: - Part 2
 
-let targetJoltage = joltages.last! + 3
-var matches: [[Int]] = []
+var cache: [Int:Int] = [:]
 
-func visit(visited: [Int], remaining: [Int]) {
-    if (remaining.isEmpty) {
-        // print("* Match: \(visited)")
-        matches.append(visited)
-        return
+func visit(idx: Int) -> Int {
+    if idx == joltages.count - 1 {
+        return 1
     }
 
-    let currentJoltage = visited.last ?? 0
+    if let cached = cache[idx] {
+        return cached
+    }
 
-    // print("- (\(currentJoltage)): \(visited) - \(remaining)")
+    var result = 0
 
-    var invalidIndexes: [Int] = []
-    var nextIndexes: [Int] = []
+    let range = (idx + 1) ..< joltages.count
 
-    for (idx, value) in remaining.enumerated() {
-        let diff = value - currentJoltage
-
-        if diff <= 0 {
-            invalidIndexes.append(idx)
-        } else if diff <= 3 {
-            nextIndexes.append(idx)
-        } else {
-            break
+    for nextIdx in range {
+        if joltages[nextIdx] - joltages[idx] <= 3 {
+            result += visit(idx: nextIdx)
         }
     }
 
-    for index in nextIndexes {
-        var nextVisited = visited
-        var nextRemaining = remaining
+    cache[idx] = result
 
-        nextVisited.append(nextRemaining.remove(at: index))
-        nextRemaining = nextRemaining.filter { $0 > nextVisited.last! }
-
-        visit(visited: nextVisited, remaining: nextRemaining)
-    }
+    return result
 }
 
-visit(visited: [], remaining: joltages)
-print("Total Matches: \(matches.count)")
+
+let total = visit(idx: 0)
+print("Total Matches: \(total)")
