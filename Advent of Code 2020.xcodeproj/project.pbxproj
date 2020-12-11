@@ -40,6 +40,15 @@
 		D19C828A25766B1F006BF92A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19C828925766B1F006BF92A /* Data.swift */; };
 		DC7570F7257A7E1C0052D099 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7570F6257A7E1C0052D099 /* main.swift */; };
 		DC757102257A7E550052D099 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC757101257A7E550052D099 /* Data.swift */; };
+		DCC1C83A2583D186009F7AB8 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC1C8392583D186009F7AB8 /* Board.swift */; };
+		DCC1C84F2583D24D009F7AB8 /* Day_11_AnimatedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC1C84E2583D24D009F7AB8 /* Day_11_AnimatedApp.swift */; };
+		DCC1C8512583D24D009F7AB8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC1C8502583D24D009F7AB8 /* ContentView.swift */; };
+		DCC1C8532583D251009F7AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCC1C8522583D251009F7AB8 /* Assets.xcassets */; };
+		DCC1C8562583D251009F7AB8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCC1C8552583D251009F7AB8 /* Preview Assets.xcassets */; };
+		DCC1C8782583D263009F7AB8 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC1C8392583D186009F7AB8 /* Board.swift */; };
+		DCC1C8872583D304009F7AB8 /* Utilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17A4FC6256B075B00F7DE61 /* Utilities.framework */; };
+		DCC1C8882583D304009F7AB8 /* Utilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D17A4FC6256B075B00F7DE61 /* Utilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DCC1C8992583D334009F7AB8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1376A1825839E800059A87F /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,13 @@
 			remoteInfo = Utilities;
 		};
 		D17A500E256B0D6600F7DE61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D17A4FBB256B072800F7DE61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D17A4FC5256B075B00F7DE61;
+			remoteInfo = Utilities;
+		};
+		DCC1C8892583D304009F7AB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D17A4FBB256B072800F7DE61 /* Project object */;
 			proxyType = 1;
@@ -170,6 +186,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		DCC1C88B2583D304009F7AB8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCC1C8882583D304009F7AB8 /* Utilities.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -221,6 +248,14 @@
 		DC7570F4257A7E1C0052D099 /* Day 04 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Day 04"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7570F6257A7E1C0052D099 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DC757101257A7E550052D099 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		DCC1C8392583D186009F7AB8 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		DCC1C84C2583D24D009F7AB8 /* Day 11 Animated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Day 11 Animated.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCC1C84E2583D24D009F7AB8 /* Day_11_AnimatedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day_11_AnimatedApp.swift; sourceTree = "<group>"; };
+		DCC1C8502583D24D009F7AB8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DCC1C8522583D251009F7AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCC1C8552583D251009F7AB8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCC1C8572583D251009F7AB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCC1C8582583D251009F7AB8 /* Day_11_Animated.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Day_11_Animated.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +359,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCC1C8492583D24D009F7AB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC1C8872583D304009F7AB8 /* Utilities.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -395,6 +438,7 @@
 			children = (
 				D13769F925839E6B0059A87F /* main.swift */,
 				D1376A1825839E800059A87F /* Data.swift */,
+				DCC1C8392583D186009F7AB8 /* Board.swift */,
 			);
 			path = "Day 11";
 			sourceTree = "<group>";
@@ -413,6 +457,7 @@
 				D13769772580F3ED0059A87F /* Day 09 */,
 				D13769BB258249CA0059A87F /* Day 10 */,
 				D13769F825839E6B0059A87F /* Day 11 */,
+				DCC1C84D2583D24D009F7AB8 /* Day 11 Animated */,
 				D17A4FED256B0CE500F7DE61 /* RenderableWorkViewTesting */,
 				D17A4FC8256B075B00F7DE61 /* Utilities */,
 				D17A4FD3256B075B00F7DE61 /* UtilitiesTests */,
@@ -438,6 +483,7 @@
 				D13769762580F3ED0059A87F /* Day 09 */,
 				D13769BA258249CA0059A87F /* Day 10 */,
 				D13769F725839E6B0059A87F /* Day 11 */,
+				DCC1C84C2583D24D009F7AB8 /* Day 11 Animated.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -515,6 +561,27 @@
 				DC757101257A7E550052D099 /* Data.swift */,
 			);
 			path = "Day 04";
+			sourceTree = "<group>";
+		};
+		DCC1C84D2583D24D009F7AB8 /* Day 11 Animated */ = {
+			isa = PBXGroup;
+			children = (
+				DCC1C84E2583D24D009F7AB8 /* Day_11_AnimatedApp.swift */,
+				DCC1C8502583D24D009F7AB8 /* ContentView.swift */,
+				DCC1C8522583D251009F7AB8 /* Assets.xcassets */,
+				DCC1C8572583D251009F7AB8 /* Info.plist */,
+				DCC1C8582583D251009F7AB8 /* Day_11_Animated.entitlements */,
+				DCC1C8542583D251009F7AB8 /* Preview Content */,
+			);
+			path = "Day 11 Animated";
+			sourceTree = "<group>";
+		};
+		DCC1C8542583D251009F7AB8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DCC1C8552583D251009F7AB8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -773,6 +840,25 @@
 			productReference = DC7570F4257A7E1C0052D099 /* Day 04 */;
 			productType = "com.apple.product-type.tool";
 		};
+		DCC1C84B2583D24D009F7AB8 /* Day 11 Animated */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCC1C8592583D251009F7AB8 /* Build configuration list for PBXNativeTarget "Day 11 Animated" */;
+			buildPhases = (
+				DCC1C8482583D24D009F7AB8 /* Sources */,
+				DCC1C8492583D24D009F7AB8 /* Frameworks */,
+				DCC1C84A2583D24D009F7AB8 /* Resources */,
+				DCC1C88B2583D304009F7AB8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCC1C88A2583D304009F7AB8 /* PBXTargetDependency */,
+			);
+			name = "Day 11 Animated";
+			productName = "Day 11 Animated";
+			productReference = DCC1C84C2583D24D009F7AB8 /* Day 11 Animated.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -825,6 +911,9 @@
 					DC7570F3257A7E1C0052D099 = {
 						CreatedOnToolsVersion = 12.2;
 					};
+					DCC1C84B2583D24D009F7AB8 = {
+						CreatedOnToolsVersion = 12.2;
+					};
 				};
 			};
 			buildConfigurationList = D17A4FBE256B072800F7DE61 /* Build configuration list for PBXProject "Advent of Code 2020" */;
@@ -851,6 +940,7 @@
 				D13769752580F3ED0059A87F /* Day 09 */,
 				D13769B9258249CA0059A87F /* Day 10 */,
 				D13769F625839E6B0059A87F /* Day 11 */,
+				DCC1C84B2583D24D009F7AB8 /* Day 11 Animated */,
 				D17A4FEB256B0CE500F7DE61 /* RenderableWorkViewTesting */,
 				D17A4FC5256B075B00F7DE61 /* Utilities */,
 				D17A4FCE256B075B00F7DE61 /* UtilitiesTests */,
@@ -879,6 +969,15 @@
 			files = (
 				D17A4FF6256B0CE700F7DE61 /* Preview Assets.xcassets in Resources */,
 				D17A4FF3256B0CE700F7DE61 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCC1C84A2583D24D009F7AB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC1C8562583D251009F7AB8 /* Preview Assets.xcassets in Resources */,
+				DCC1C8532583D251009F7AB8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +1053,7 @@
 			files = (
 				D13769FA25839E6B0059A87F /* main.swift in Sources */,
 				D1376A1925839E800059A87F /* Data.swift in Sources */,
+				DCC1C83A2583D186009F7AB8 /* Board.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,6 +1110,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCC1C8482583D24D009F7AB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC1C8512583D24D009F7AB8 /* ContentView.swift in Sources */,
+				DCC1C84F2583D24D009F7AB8 /* Day_11_AnimatedApp.swift in Sources */,
+				DCC1C8782583D263009F7AB8 /* Board.swift in Sources */,
+				DCC1C8992583D334009F7AB8 /* Data.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1022,6 +1133,11 @@
 			isa = PBXTargetDependency;
 			target = D17A4FC5256B075B00F7DE61 /* Utilities */;
 			targetProxy = D17A500E256B0D6600F7DE61 /* PBXContainerItemProxy */;
+		};
+		DCC1C88A2583D304009F7AB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D17A4FC5256B075B00F7DE61 /* Utilities */;
+			targetProxy = DCC1C8892583D304009F7AB8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2860,6 +2976,155 @@
 			};
 			name = Release;
 		};
+		DCC1C85A2583D251009F7AB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Day 11 Animated/Day_11_Animated.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"Day 11 Animated/Preview Content\"";
+				DEVELOPMENT_TEAM = 67X2M9MT5G;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Day 11 Animated/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airsquirrels.Day-11-Animated";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DCC1C85B2583D251009F7AB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Day 11 Animated/Day_11_Animated.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"Day 11 Animated/Preview Content\"";
+				DEVELOPMENT_TEAM = 67X2M9MT5G;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Day 11 Animated/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.airsquirrels.Day-11-Animated";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2994,6 +3259,15 @@
 			buildConfigurations = (
 				DC7570F8257A7E1C0052D099 /* Debug */,
 				DC7570F9257A7E1C0052D099 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCC1C8592583D251009F7AB8 /* Build configuration list for PBXNativeTarget "Day 11 Animated" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCC1C85A2583D251009F7AB8 /* Debug */,
+				DCC1C85B2583D251009F7AB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
