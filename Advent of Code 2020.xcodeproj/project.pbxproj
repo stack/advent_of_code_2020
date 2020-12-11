@@ -256,6 +256,7 @@
 		DCC1C8552583D251009F7AB8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DCC1C8572583D251009F7AB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC1C8582583D251009F7AB8 /* Day_11_Animated.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Day_11_Animated.entitlements; sourceTree = "<group>"; };
+		DCC1C8A72583F01B009F7AB8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +447,7 @@
 		D17A4FBA256B072800F7DE61 = {
 			isa = PBXGroup;
 			children = (
+				DCC1C8A72583F01B009F7AB8 /* README.md */,
 				D19C827D25766B07006BF92A /* Day 01 */,
 				D1996FD12577B69B005BDDC5 /* Day 02 */,
 				D1027F7F257911D20068A4CA /* Day 03 */,

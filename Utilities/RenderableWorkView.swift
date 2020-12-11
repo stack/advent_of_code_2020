@@ -42,6 +42,7 @@ public struct RenderableWorkView: View {
         panel.allowedFileTypes = ["mp4"]
         panel.directoryURL = desktopUrl
         panel.nameFieldStringValue = "Output"
+        panel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
 
         panel.begin { response in
             guard response == .OK else {
