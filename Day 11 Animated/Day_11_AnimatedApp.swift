@@ -30,8 +30,10 @@ struct Day_11_AnimatedApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RenderableWorkView(width: width * tileSize, height: height * tileSize, frameTime: 0.1) { animator in
+            RenderableWorkView(width: width * tileSize, height: height * tileSize, frameTime: 0.05) { animator in
                 board.run(mode: .part2) { (working, step) in
+                    guard step % 2 == 0 else { return }
+
                     animator.draw { (context) in
                         for (y, row) in working.enumerated() {
                             for (x, value) in row.enumerated() {
