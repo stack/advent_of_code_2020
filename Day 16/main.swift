@@ -70,8 +70,11 @@ for line in data.split(separator: "\n") {
 }
 
 var errors: [Int] = []
+var validTickets: [[Int]] = []
 
 for nearby in nearbyTickets {
+    var isValid = true
+
     for value in nearby {
         var matched = false
 
@@ -88,9 +91,31 @@ for nearby in nearbyTickets {
 
         if !matched {
             errors.append(value)
+            isValid = false
         }
+    }
+
+    if isValid {
+        validTickets.append(nearby)
     }
 }
 
 let errorRate = errors.reduce(0, +)
 print("Error rate: \(errorRate)")
+
+var exclusions = Array(repeating: Set<String>(), count: yourTicket.count)
+
+for ticket in validTickets {
+    for (idx, value) in ticket.enumerated() {
+        for (rule, ranges) in rules {
+            let matches = ranges.reduce(false) { $0 || $1.contains(value) }
+
+            if (!matches) {
+                exclusions[idx].insert(rule)
+            }
+        }
+    }
+}
+
+print("Exclusions: \(exclusions)")
+
