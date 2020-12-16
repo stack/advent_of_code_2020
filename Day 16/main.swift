@@ -15,7 +15,7 @@ enum State {
     case nearbyTickets
 }
 
-let ruleRegex = try! NSRegularExpression(pattern: "(\\w+): (\\d+)-(\\d+) or (\\d+)-(\\d+)", options: [])
+let ruleRegex = try! NSRegularExpression(pattern: "(.+): (\\d+)-(\\d+) or (\\d+)-(\\d+)", options: [])
 
 var state = State.rules
 var rules: [String:[ClosedRange<Int>]] = [:]
@@ -119,3 +119,53 @@ for ticket in validTickets {
 
 print("Exclusions: \(exclusions)")
 
+var solved = 0
+var columns = Array(repeating: "", count: yourTicket.count)
+let allKeys = Set(rules.keys)
+
+while solved < yourTicket.count {
+    var found: String? = nil
+
+    for (idx, exclusion) in exclusions.enumerated() {
+        guard exclusion.count == allKeys.count - 1  else {
+            continue
+        }
+
+        let missing = allKeys.subtracting(exclusion)
+
+        precondition(missing.count == 1)
+        let result = missing.first!
+
+        print("Index \(idx) is missing \(result)")
+
+        columns[idx] = result
+        solved += 1
+
+        print("Columns: \(columns)")
+
+        found = result
+
+        break
+    }
+
+    guard let toAdd = found else {
+        fatalError("Failed to find a match")
+    }
+
+    for idx in 0 ..< exclusions.count {
+        exclusions[idx].insert(toAdd)
+    }
+}
+
+var answer = 1
+
+for (idx, value) in yourTicket.enumerated() {
+    let key = columns[idx]
+
+    if key.contains("departure") {
+        print("Column \(idx) is \"\(key)\" -> \(value)")
+        answer *= value
+    }
+}
+
+print("Result: \(answer)")
