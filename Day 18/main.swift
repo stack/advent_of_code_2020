@@ -7,7 +7,7 @@
 
 import Foundation
 
-let data = Examples
+let data = Inputs
 
 enum Token: CustomDebugStringConvertible {
     case number(Int)
@@ -111,9 +111,16 @@ struct OperatorNode: Node {
 class Parser {
     let tokens: [Token]
     var head: Int = 0
+    let isAdvanced: Bool
 
-    init(tokens: [Token]) {
+    static let precedences: [String:Int] = [
+        "+": 2,
+        "*": 1
+    ]
+
+    init(tokens: [Token], isAdvanced: Bool = false) {
         self.tokens = tokens
+        self.isAdvanced = isAdvanced
     }
 
     func peek() -> Token {
@@ -130,15 +137,6 @@ class Parser {
         return value
     }
 
-    func parse() -> Node {
-        return parseExpression()
-    }
-
-    func parseExpression() -> Node {
-        let node = parsePrimary()
-        return parseBinary(node)
-    }
-
     func nextBinaryIsValid() -> Bool {
         guard head < tokens.count else {
             return false
@@ -151,7 +149,61 @@ class Parser {
         return true
     }
 
+    func nextPrecedence() -> Int {
+        guard head < tokens.count else {
+            return -1
+        }
+
+        guard case .op(let op) = peek() else {
+            return -1
+        }
+
+        guard let precedence = Self.precedences[op] else {
+            fatalError("Unsupported operator")
+        }
+
+        return precedence
+    }
+
+    func parse() -> Node {
+        return parseExpression()
+    }
+
+    func parseExpression() -> Node {
+        let node = parsePrimary()
+        return parseBinary(node)
+    }
+
     func parseBinary(_ node: Node) -> Node {
+        return isAdvanced ? parseBinaryAdvanced(node) : parseBinaryStandard(node)
+    }
+
+    func parseBinaryAdvanced(_ node: Node, nodePrecedence: Int = 0) -> Node {
+        var lhs = node
+
+        while true {
+            let precedence = nextPrecedence()
+
+            if precedence < nodePrecedence {
+                return lhs
+            }
+
+            guard case let .op(op) = pop() else {
+                fatalError("Failed to parse operator")
+            }
+
+            var rhs = parsePrimary()
+            let nextPrec = nextPrecedence()
+
+            if precedence < nextPrec {
+                rhs = parseBinaryAdvanced(rhs, nodePrecedence: precedence + 1)
+            }
+
+            lhs = OperatorNode(op: op, lhs: lhs, rhs: rhs)
+        }
+    }
+
+    func parseBinaryStandard(_ node: Node) -> Node {
         var lhs = node
 
         while true {
@@ -163,13 +215,13 @@ class Parser {
                 fatalError("Failed to parse operator")
             }
 
-            var rhs = parsePrimary()
-
-            if nextBinaryIsValid() {
-                rhs = parseBinary(rhs)
-            }
+            let rhs = parsePrimary()
 
             lhs = OperatorNode(op: op, lhs: lhs, rhs: rhs)
+
+            if nextBinaryIsValid() {
+                lhs = parseBinary(lhs)
+            }
         }
     }
 
@@ -209,6 +261,12 @@ class Parser {
 
 let tokenizer = Tokenizer()
 
+print("Part 1:")
+print("=======")
+print()
+
+var sum = 0
+
 for line in data.split(separator: "\n") {
     let tokens = tokenizer.tokenize(line: String(line))
     print("Tokenized: \(line) -> \(tokens)")
@@ -217,5 +275,36 @@ for line in data.split(separator: "\n") {
     let node = parser.parse()
 
     print("Node: \(node)")
-    print("Result: \(node.evaluate())")
+
+    let result = node.evaluate()
+    print("Result: \(result)")
+
+    sum += result
 }
+
+print("Sum: \(sum)")
+print()
+
+print("Part 2:")
+print("=======")
+print()
+
+sum = 0
+
+for line in data.split(separator: "\n") {
+    let tokens = tokenizer.tokenize(line: String(line))
+    print("Tokenized: \(line) -> \(tokens)")
+
+    let parser = Parser(tokens: tokens, isAdvanced: true)
+    let node = parser.parse()
+
+    print("Node: \(node)")
+
+    let result = node.evaluate()
+    print("Result: \(result)")
+
+    sum += result
+}
+
+print("Sum: \(sum)")
+print()
