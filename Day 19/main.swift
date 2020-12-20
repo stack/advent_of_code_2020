@@ -30,25 +30,25 @@ struct EmptyRule: Rule {
 }
 
 struct StaticRule: Rule {
-    let values: [String]
-    let infinite: Bool
+    let value: String
 
     var debugDescription: String {
-        return values.map { "\"\($0)\"" }.joined(separator: " | ")
+        return "\"\(value)\""
     }
 }
 
-class Resolver {
+let ruleRegex = try! NSRegularExpression(pattern: "(\\d+): (.+)", options: [])
 
+class Visitor {
     var rules: [Rule] = []
-    var firstRuleMatches: Set<String> = []
+    var tests: [String] = []
 
     func add(rule: String, index: Int) {
         let newRule: Rule
 
         if rule.hasPrefix("\"") {
             let value = rule.replacingOccurrences(of: "\"", with: "")
-            let staticRule = StaticRule(values: [value], infinite: false)
+            let staticRule = StaticRule(value: value)
             newRule = staticRule
         } else {
             let parts = rule
@@ -68,87 +68,89 @@ class Resolver {
         rules[index] = newRule
     }
 
-    func resolve(patched: Bool = false) {
-        if patched {
-            rules[8] = ConditionalRule(parts: [[42], [42, 8]])
-            rules[11] = ConditionalRule(parts: [[42,31], [42, 11, 3]])
-        }
-        
-        for idx in 0 ..< rules.count {
-            if rules[idx] is EmptyRule {
-            } else {
-                resolve(idx: idx)
+    func run() {
+        // rules[8] = ConditionalRule(parts: [[42], [42, 8]])
+        // rules[11] = ConditionalRule(parts: [[42, 31], [42, 11, 31]])
+
+        var matches = 0
+
+        for test in tests {
+            // print("Testing \(test)")
+            let possible = possibleValues(test: test, idx: 0)
+            // print("Possible: \(possible)")
+            // print("==========")
+
+            if possible.contains(test) {
+                matches += 1
             }
         }
 
-        let firstRule = rules[0] as! StaticRule
-        firstRuleMatches = Set(firstRule.values)
+        print("Matches: \(matches)")
     }
 
-    func firstMatch(line: String) -> Int? {
-        if firstRuleMatches.contains(line) {
-            return 0
-        }
+    func possibleValues(test: String, idx: Int, prior: String = "") -> [String] {
+        // print("IDX: \(idx) -> \(prior)")
 
-        return nil
-    }
+        let rule = rules[idx]
 
-    @discardableResult private func resolve(idx: Int) -> StaticRule {
-        if let staticRule = rules[idx] as? StaticRule {
-            return staticRule
-        } else if let conditionalRule = rules[idx] as? ConditionalRule {
-            var values: [String] = []
-
-            // "2 3 | 3 2"
-            for part in conditionalRule.parts {
-                // "2 3"
-                let resolved = part.map { resolve(idx: $0) }
-                let results = generate(rules: resolved)
-
-                values.append(contentsOf: results)
-            }
-
-            let rule = StaticRule(values: values, infinite: false)
-            rules[idx] = rule
-
-            return rule
-        } else {
-            fatalError("Cannot resolve empty rule")
+        switch rule {
+        case let x as ConditionalRule:
+            return possibleValues(test: test, rule: x, prior: prior)
+        case let x as StaticRule:
+            return possibleValues(test: test, rule: x, prior: prior)
+        default:
+            fatalError("Cannot get value")
         }
     }
 
-    private func generate(rules: [StaticRule], ruleIdx: Int = 0, current: [String] = []) -> [String] {
-        guard ruleIdx < rules.count else {
-            return current
-        }
+    func possibleValues(test: String, rule: ConditionalRule, prior: String) -> [String] {
+        // print("Cond -> \(prior)")
 
-        let currentRule = rules[ruleIdx]
-        var next: [String] = []
+        var possible: [String] = []
 
-        if current.isEmpty {
-            next.append(contentsOf: currentRule.values)
-        } else {
-            for currentValue in current {
-                for value in currentRule.values {
-                    next.append(currentValue + value)
+        for part in rule.parts {
+            var combos: [String] = []
+
+            for idx in part {
+                if combos.isEmpty {
+                    combos = possibleValues(test: test, idx: idx, prior: prior)
+                } else {
+                    var nextCombos: [String] = []
+
+                    for combo in combos {
+                        let results = possibleValues(test: test, idx: idx, prior: prior + combo)
+
+                        for result in results {
+                            nextCombos.append(combo + result)
+                        }
+                    }
+
+                    combos = nextCombos
                 }
             }
+
+            possible.append(contentsOf: combos)
         }
 
-        return generate(rules: rules, ruleIdx: ruleIdx + 1, current: next)
+        return possible
     }
 
-    func printRules() {
-        for (idx, rule) in rules.enumerated() {
-            print("\(idx): \(rule)")
+    func possibleValues(test: String, rule: StaticRule, prior: String) -> [String] {
+        // print("Static -> \(prior)")
+
+        if !prior.isEmpty {
+            let next = prior + rule.value
+
+            if !test.hasPrefix(next) {
+                return []
+            }
         }
+
+        return [rule.value]
     }
 }
 
-let ruleRegex = try! NSRegularExpression(pattern: "(\\d+): (.+)", options: [])
-
-let resolver = Resolver()
-var toTest: [String] = []
+let visitor = Visitor()
 
 for line in data.split(separator: "\n") {
     let lineString = String(line)
@@ -161,28 +163,10 @@ for line in data.split(separator: "\n") {
         let ruleRange = Range(match.range(at: 2), in: lineString)!
         let rule = String(lineString[ruleRange])
 
-        resolver.add(rule: rule, index: index)
+        visitor.add(rule: rule, index: index)
     } else {
-        toTest.append(lineString)
+        visitor.tests.append(lineString)
     }
 }
 
-print("Before resolution:")
-resolver.printRules()
-
-resolver.resolve()
-
-print()
-print("After resolution:")
-// resolver.printRules()
-
-let matches = toTest.compactMap { (line: String) -> Int? in
-    let result = resolver.firstMatch(line: line)
-
-    print("\(line) matches \(String(describing: result))")
-
-    return result
-}
-
-let matches0 = matches.filter { $0 == 0 }
-print("Matches 0: \(matches0.count)")
+visitor.run()
